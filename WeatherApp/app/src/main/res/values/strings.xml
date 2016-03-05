@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="textViewMessage">There are no cities to display. Add using the \"+\" button from the menu</string>
+    <string name="add_city">Add a city</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="buttonSave">Save City</string>
+</resources>
