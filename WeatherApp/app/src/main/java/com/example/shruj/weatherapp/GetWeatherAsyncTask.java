@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -76,10 +77,13 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
 
     @Override
     protected void onPostExecute(List<Forecast> forecasts) {
-        super.onPostExecute(forecasts);
 
-        if (forecasts != null) {
+        super.onPostExecute(forecasts);
+        if (forecasts != null && !forecasts.isEmpty()) {
             setHourlyDataActivityElements(forecasts);
+        } else {
+            Constants.ToastMessages(activity, Constants.TOAST_NO_CITIES);
+            activity.finish();
         }
         progressDialog.dismiss();
 
@@ -87,6 +91,9 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
 
 
     private void setHourlyDataActivityElements(final List<Forecast> forecasts) {
+
+        TextView textView = (TextView) activity.findViewById(R.id.textViewLocationValue);
+        textView.setText(location);
         WeatherAdapter weatherAdapter = new WeatherAdapter(activity, R.layout.listview_row_layout, forecasts);
 
         ListView listView = (ListView) activity.findViewById(R.id.listView);

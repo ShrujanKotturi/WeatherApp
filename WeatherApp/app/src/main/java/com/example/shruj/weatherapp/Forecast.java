@@ -19,6 +19,37 @@ public class Forecast implements Serializable {
     String maximumTemp;
     String minimumTemp;
     String pressure;
+    String error;
+
+
+    @Override
+    public String toString() {
+        return "Forecast{" +
+                "time='" + time + '\'' +
+                ", temperature='" + temperature + '\'' +
+                ", dewpoint='" + dewpoint + '\'' +
+                ", clouds='" + clouds + '\'' +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", windSpeed='" + windSpeed + '\'' +
+                ", windDirection='" + windDirection + '\'' +
+                ", climateType='" + climateType + '\'' +
+                ", humidity='" + humidity + '\'' +
+                ", feelsLike='" + feelsLike + '\'' +
+                ", maximumTemp='" + maximumTemp + '\'' +
+                ", minimumTemp='" + minimumTemp + '\'' +
+                ", pressure='" + pressure + '\'' +
+                ", error='" + error + '\'' +
+                ", windAngle='" + windAngle + '\'' +
+                '}';
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 
     public String getWindAngle() {
         return windAngle;
@@ -117,25 +148,6 @@ public class Forecast implements Serializable {
 
     public void setPressure(String pressure) {
         this.pressure = pressure;
-    }
-
-    @Override
-    public String toString() {
-        return "Forecast{" +
-                "time='" + time + '\'' +
-                ", temperature='" + temperature + '\'' +
-                ", dewpoint='" + dewpoint + '\'' +
-                ", clouds='" + clouds + '\'' +
-                ", iconUrl='" + iconUrl + '\'' +
-                ", windSpeed='" + windSpeed + '\'' +
-                ", windDirection='" + windDirection + '\'' +
-                ", climateType='" + climateType + '\'' +
-                ", humidity='" + humidity + '\'' +
-                ", feelsLike='" + feelsLike + '\'' +
-                ", maximumTemp='" + maximumTemp + '\'' +
-                ", minimumTemp='" + minimumTemp + '\'' +
-                ", pressure='" + pressure + '\'' +
-                '}';
     }
 
 

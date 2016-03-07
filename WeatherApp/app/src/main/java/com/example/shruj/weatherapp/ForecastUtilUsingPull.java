@@ -65,8 +65,10 @@ public class ForecastUtilUsingPull {
                             parser.nextTag();
                             if (parser.getName().equalsIgnoreCase(Constants.ENGLISH))
                                 forecast.setPressure(parser.nextText().trim());
+                        } else if (parser.getName().equalsIgnoreCase(Constants.ERROR)) {
+                            forecast = new Forecast();
+                            forecast.setError(Constants.ERROR);
                         }
-
                         break;
                     case XmlPullParser.END_TAG:
                         if (parser.getName().equals(Constants.FORECAST)) {

@@ -10,7 +10,7 @@ public class HourlyDataActivity extends AppCompatActivity {
     Intent intent;
     Location locationDetails;
     String currentLocation;
-    TextView textViewLocationValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +21,13 @@ public class HourlyDataActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(Boolean.TRUE);
         actionBar.setIcon(R.drawable.ic_launcher);
 
-        textViewLocationValue = (TextView) findViewById(R.id.textViewLocationValue);
+
 
         intent = getIntent();
         if (intent.getExtras() != null) {
             locationDetails = (Location) intent.getExtras().getSerializable(Constants.INTENT_INFO_LOCATION);
             currentLocation = Location.currentLocationFormatter(locationDetails);
-            textViewLocationValue.setText(currentLocation);
+
             new GetWeatherAsyncTask(this, currentLocation).execute(locationDetails);
         }
     }

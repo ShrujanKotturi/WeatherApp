@@ -18,13 +18,18 @@
             android:label="Weather App">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddCityActivity" />
-        <activity android:name=".HourlyDataActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity
+            android:name=".AddCityActivity"
+            android:label="Add City Activity" />
+        <activity
+            android:name=".HourlyDataActivity"
+            android:label="Hourly Data Activity" />
+        <activity
+            android:name=".DetailsActivity"
+            android:label="Details Activity"></activity>
     </application>
 
 </manifest>

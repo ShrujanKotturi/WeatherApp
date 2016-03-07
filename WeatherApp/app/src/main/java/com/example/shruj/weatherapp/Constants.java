@@ -8,6 +8,8 @@ import android.widget.Toast;
  */
 public class Constants {
 
+    public static String TYPE = "type";
+    public static String ERROR = "error";
     //API related
     public static String API_KEY_VALUE = "95977d2310997675";
     public static String GET_METHOD = "GET";
