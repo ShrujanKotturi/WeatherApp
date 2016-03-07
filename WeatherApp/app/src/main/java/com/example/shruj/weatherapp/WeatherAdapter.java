@@ -57,6 +57,8 @@ public class WeatherAdapter extends ArrayAdapter<Forecast> {
         if (forecast.getIconUrl() != null) {
             Picasso.with(mContext)
                     .load(forecast.getIconUrl())
+                    .fit()
+                    .centerInside()
                     .into(imageView);
         }
         return convertView;

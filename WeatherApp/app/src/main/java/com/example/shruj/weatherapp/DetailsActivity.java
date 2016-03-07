@@ -98,6 +98,8 @@ public class DetailsActivity extends AppCompatActivity {
             if (currentForecast.getIconUrl() != null) {
                 Picasso.with(DetailsActivity.this)
                         .load(currentForecast.getIconUrl())
+                        .fit()
+                        .centerInside()
                         .into(imageView);
             }
 
