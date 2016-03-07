@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_item, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_favorite:
                 intent = new Intent(MainActivity.this, AddCityActivity.class);
                 startActivityForResult(intent, Constants.LOCATION_REQUEST_CODE);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Constants.LOCATION_REQUEST_CODE) {
+        if (requestCode == Constants.LOCATION_REQUEST_CODE && data != null) {
             if (locationArrayList == null) {
                 locationArrayList = new ArrayList<>();
             }

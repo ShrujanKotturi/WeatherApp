@@ -56,7 +56,6 @@ public class ForecastUtil {
             } else if (localName.equals(Constants.FCTTIME_PRETTY)) {
                 forecast.setTime(xmlInnerText.toString().trim());
             } else if (localName.equals(Constants.TEMP)) {
-
                 forecast.setTemperature(xmlInnerText.toString().trim());
             }
 

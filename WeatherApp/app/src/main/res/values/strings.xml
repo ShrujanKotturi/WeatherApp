@@ -4,4 +4,13 @@
     <string name="add_city">Add a city</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="buttonSave">Save City</string>
+    <string name="textViewCurrentLocation">Current Location :</string>
+    <string name="textViewFeelsLike">Feels Like :</string>
+    <string name="textViewHumidity">Humidity :</string>
+    <string name="textViewDewpoint">Dewpoint :</string>
+    <string name="textViewPressure">Pressure :</string>
+    <string name="textViewClouds">Clouds :</string>
+    <string name="textViewWinds">Winds :</string>
+    <string name="textViewMaxTemperature">Max Temperature :</string>
+    <string name="textViewMinTemperature">Min Temperature :</string>
 </resources>

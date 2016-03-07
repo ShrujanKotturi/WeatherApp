@@ -36,4 +36,8 @@ public class Location implements Serializable {
         return location;
     }
 
+    public static String currentLocationFormatter(Location location) {
+        return location.getCityName() + Constants.COMMA + location.getStateCode();
+    }
+
 }

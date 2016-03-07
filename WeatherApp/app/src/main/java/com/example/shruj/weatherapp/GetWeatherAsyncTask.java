@@ -2,13 +2,17 @@ package com.example.shruj.weatherapp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.util.List;
 
@@ -19,9 +23,11 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
 
     Activity activity;
     ProgressDialog progressDialog;
+    String location;
 
-    public GetWeatherAsyncTask(Activity activity) {
+    public GetWeatherAsyncTask(Activity activity, String location) {
         this.activity = activity;
+        this.location = location;
     }
 
     @Override
@@ -33,12 +39,9 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
         requestParam.addParam(Constants.STATE, params[0].getStateCode());
         requestParam.addParam(Constants.HOURLY, Constants.HOURLY_VALUE);
         requestParam.addParam(Constants.CITY, params[0].getCityName());
-
-        Log.d("demo", "request" + requestParam.getEncodedUrl());
         try {
             HttpURLConnection httpURLConnection = requestParam.setUpConnection();
             int statusCode = httpURLConnection.getResponseCode();
-            Log.d("demo", "statusCode" + statusCode);
             if (statusCode == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 return ForecastUtilUsingPull.ForecastPullParser.parseForecast(inputStream);
@@ -73,12 +76,30 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
     protected void onPostExecute(List<Forecast> forecasts) {
         super.onPostExecute(forecasts);
         progressDialog.dismiss();
-        Log.d("demo", "onPostExecute");
         if (forecasts != null) {
-            for (Forecast forecast : forecasts) {
-                Log.d("forecast", forecast.toString());
-            }
-        } else Log.d("forecast", "null");
+            setHourlyDataActivityElements(forecasts);
+        }
 
+    }
+
+
+    private void setHourlyDataActivityElements(final List<Forecast> forecasts) {
+        WeatherAdapter weatherAdapter = new WeatherAdapter(activity, R.layout.listview_row_layout, forecasts);
+
+        ListView listView = (ListView) activity.findViewById(R.id.listView);
+        listView.setAdapter(weatherAdapter);
+
+        weatherAdapter.setNotifyOnChange(Boolean.TRUE);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(activity, DetailsActivity.class);
+                intent.putExtra(Constants.LIST_OBJECT, (Serializable) forecasts);
+                intent.putExtra(Constants.CURRENT_OBJECT, position);
+                intent.putExtra(Constants.CURRENT_LOCATION, location);
+                activity.startActivity(intent);
+            }
+        });
     }
 }
