@@ -17,6 +17,10 @@ public class HourlyDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hourly_data);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(Boolean.TRUE);
+        actionBar.setIcon(R.drawable.ic_launcher);
+
         textViewLocationValue = (TextView) findViewById(R.id.textViewLocationValue);
 
         intent = getIntent();

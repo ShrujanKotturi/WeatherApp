@@ -75,10 +75,11 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
     @Override
     protected void onPostExecute(List<Forecast> forecasts) {
         super.onPostExecute(forecasts);
-        progressDialog.dismiss();
+
         if (forecasts != null) {
             setHourlyDataActivityElements(forecasts);
         }
+        progressDialog.dismiss();
 
     }
 

@@ -29,6 +29,10 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(Boolean.TRUE);
+        actionBar.setIcon(R.drawable.ic_launcher);
+
         intent = getIntent();
 
         if (intent.getExtras() != null) {

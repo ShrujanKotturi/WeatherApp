@@ -17,6 +17,9 @@ public class AddCityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_city);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(Boolean.TRUE);
+        actionBar.setIcon(R.drawable.ic_launcher);
 
         editTextCityName = (EditText) findViewById(R.id.editTextCityName);
         editTextStateCode = (EditText) findViewById(R.id.editTextStateCode);
