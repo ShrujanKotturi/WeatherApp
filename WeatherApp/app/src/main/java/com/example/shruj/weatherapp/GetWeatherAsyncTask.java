@@ -49,7 +49,9 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
+            Constants.ToastMessages(activity, Constants.TOAST_NO_CITIES);
             e.printStackTrace();
+            activity.finish();
         }
 
         return null;

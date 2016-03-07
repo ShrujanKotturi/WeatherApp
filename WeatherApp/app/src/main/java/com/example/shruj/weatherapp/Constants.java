@@ -38,6 +38,7 @@ public class Constants {
 
     //Toast messages Constants
     public static String TOAST_MANDATORY_FIELD = "Mandatory field";
+    public static String TOAST_NO_CITIES = "No cities match the query";
 
     //Toast messages
     public static void ToastMessages(Context context, String message) {
