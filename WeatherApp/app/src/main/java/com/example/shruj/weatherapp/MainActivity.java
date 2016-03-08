@@ -87,10 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isDuplicate) {
             locationArrayList.add((Location) data.getSerializableExtra(Constants.LOCATION_OBJECT));
-            for (Location location : locationArrayList) {
-                Log.d("array1", location.toString());
-            }
-
         } else {
             Constants.ToastMessages(MainActivity.this, Constants.TOAST_CITY_EXIST);
         }

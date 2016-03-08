@@ -10,7 +10,9 @@ import android.widget.EditText;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 
 public class AddCityActivity extends AppCompatActivity {
 
@@ -54,23 +56,27 @@ public class AddCityActivity extends AppCompatActivity {
 
             RequestParam requestParam = new RequestParam(Constants.GET_METHOD_STATE_CITY, Constants.URL_CITY_VALIDATION);
 
-            requestParam.addParam(Constants.CITY, params[0].getCityName());
-            requestParam.addParam(Constants.STATE, params[0].getStateCode());
-
             try {
-                HttpURLConnection httpURLConnection = requestParam.setUpConnection();
-                int statusCode = httpURLConnection.getResponseCode();
-                if (statusCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line = bufferedReader.readLine();
-                    while (line != null) {
-                        stringBuilder.append(line);
-                        line = bufferedReader.readLine();
+                requestParam.addParam(Constants.CITY, URLEncoder.encode(params[0].getCityName(), "UTF-8"));
+                requestParam.addParam(Constants.STATE, params[0].getStateCode());
+
+                try {
+                    HttpURLConnection httpURLConnection = requestParam.setUpConnection();
+                    int statusCode = httpURLConnection.getResponseCode();
+                    if (statusCode == HttpURLConnection.HTTP_OK) {
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                        StringBuilder stringBuilder = new StringBuilder();
+                        String line = bufferedReader.readLine();
+                        while (line != null) {
+                            stringBuilder.append(line);
+                            line = bufferedReader.readLine();
+                        }
+                        return stringBuilder.toString();
                     }
-                    return stringBuilder.toString();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 

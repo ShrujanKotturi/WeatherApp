@@ -1,5 +1,7 @@
 package com.example.shruj.weatherapp;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -51,10 +53,12 @@ public class RequestParam {
 
 
     public String getEncodedUrl() {
+        Log.d("demo", this.baseUrl + getEncodedParams());
         return this.baseUrl + getEncodedParams();
     }
 
     private String getEncodedCityStateUrl() {
+        Log.d("demo", this.baseUrl + getEncodedParamsForStateCityValidation());
         return this.baseUrl + getEncodedParamsForStateCityValidation();
     }
 

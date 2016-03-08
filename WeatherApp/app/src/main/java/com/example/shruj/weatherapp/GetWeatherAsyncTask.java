@@ -39,7 +39,7 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
         requestParam.addParam(Constants.API_KEY, Constants.API_KEY_VALUE);
         requestParam.addParam(Constants.HOURLY, Constants.HOURLY_VALUE);
         requestParam.addParam(Constants.STATE, params[0].getStateCode());
-        requestParam.addParam(Constants.CITY, params[0].getCityName());
+        requestParam.addParam(Constants.CITY, params[0].getCityName().replace(Constants.SPACE, Constants.UNDERSCORE));
 
         try {
             HttpURLConnection httpURLConnection = requestParam.setUpConnection();
@@ -87,7 +87,6 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
             activity.finish();
         }
         progressDialog.dismiss();
-
     }
 
 
