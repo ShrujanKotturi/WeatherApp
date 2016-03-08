@@ -37,9 +37,10 @@ public class GetWeatherAsyncTask extends AsyncTask<Location, Integer, List<Forec
         RequestParam requestParam = new RequestParam(Constants.GET_METHOD, Constants.URL);
 
         requestParam.addParam(Constants.API_KEY, Constants.API_KEY_VALUE);
-        requestParam.addParam(Constants.STATE, params[0].getStateCode());
         requestParam.addParam(Constants.HOURLY, Constants.HOURLY_VALUE);
+        requestParam.addParam(Constants.STATE, params[0].getStateCode());
         requestParam.addParam(Constants.CITY, params[0].getCityName());
+
         try {
             HttpURLConnection httpURLConnection = requestParam.setUpConnection();
             int statusCode = httpURLConnection.getResponseCode();

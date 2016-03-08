@@ -8,12 +8,11 @@ import android.widget.Toast;
  */
 public class Constants {
 
-    public static String TYPE = "type";
-    public static String ERROR = "error";
+
     //API related
     public static String API_KEY_VALUE = "95977d2310997675";
     public static String GET_METHOD = "GET";
-    public static String POST_METHOD = "POST";
+    public static String GET_METHOD_STATE_CITY = "GETCITYSTATE";
     public static String API_KEY = "api-key";
     public static String STATE = "state";
     public static String CITY = "city";
@@ -21,9 +20,12 @@ public class Constants {
     public static String HOURLY_VALUE = "hourly/q";
     public static String XML_EXTENSION = ".xml";
     public static String URL = "http://api.wunderground.com/api/";
+    public static String URL_CITY_VALIDATION = "http://api.sba.gov/geodata/all_data_for_city_of/";
     public static String SPACE = " ";
     public static String UNDERSCORE = "_";
     public static String COMMA = ", ";
+    public static String JSON_EXTENSION = ".json";
+    public static String ERROR = "error";
 
     //Intent info
     public static String INTENT_INFO_LOCATION = "LocationObject";
@@ -41,6 +43,8 @@ public class Constants {
     //Toast messages Constants
     public static String TOAST_MANDATORY_FIELD = "Mandatory field";
     public static String TOAST_NO_CITIES = "No cities match the query";
+    public static String TOAST_ENTER_PROPER_CITY = "City & State combination doesn't represent a Valid Combination in United States.";
+    public static String TOAST_CITY_EXIST = "The City & State Combination already exists in your list";
 
     //Toast messages
     public static void ToastMessages(Context context, String message) {
@@ -61,8 +65,6 @@ public class Constants {
     public static String HUMIDITY = "humidity";
     public static String FEELS_LIKE = "feelslike";
     public static String PRESSURE = "mslp";
-    public static String THUMBNAIL = "Standara Thumbnail";
-    public static String NORMAL_IMAGE = "format: \"Normal\"";
     public static String ENGLISH = "english";
     public static String WIND_DIRECTION_DIRECTION = "dir";
     public static String FAHRENHEIT = "\u2109.";

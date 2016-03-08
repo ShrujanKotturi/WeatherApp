@@ -21,8 +21,6 @@ public class HourlyDataActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(Boolean.TRUE);
         actionBar.setIcon(R.drawable.ic_launcher);
 
-
-
         intent = getIntent();
         if (intent.getExtras() != null) {
             locationDetails = (Location) intent.getExtras().getSerializable(Constants.INTENT_INFO_LOCATION);

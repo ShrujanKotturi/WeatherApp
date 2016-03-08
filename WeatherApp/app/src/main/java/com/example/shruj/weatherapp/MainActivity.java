@@ -3,6 +3,7 @@ package com.example.shruj.weatherapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
             listView.setVisibility(View.INVISIBLE);
         }
 
-        //remove these
-        //setDefaultLocation();
-        //setListView();
-
     }
 
     @Override
@@ -55,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.action_favorite:
                 intent = new Intent(MainActivity.this, AddCityActivity.class);
@@ -64,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     @Override
@@ -74,8 +69,30 @@ public class MainActivity extends AppCompatActivity {
             if (locationArrayList == null) {
                 locationArrayList = new ArrayList<>();
             }
-            locationArrayList.add((Location) data.getSerializableExtra(Constants.LOCATION_OBJECT));
+            removeDuplicates(data);
             setListView();
+        }
+    }
+
+    private void removeDuplicates(Intent data) {
+        Boolean isDuplicate = Boolean.FALSE;
+        Location currentLocation = (Location) data.getSerializableExtra(Constants.LOCATION_OBJECT);
+
+        for (Location location : locationArrayList) {
+            if (location.toString().equals(currentLocation.toString())) {
+                isDuplicate = Boolean.TRUE;
+                break;
+            }
+        }
+
+        if (!isDuplicate) {
+            locationArrayList.add((Location) data.getSerializableExtra(Constants.LOCATION_OBJECT));
+            for (Location location : locationArrayList) {
+                Log.d("array1", location.toString());
+            }
+
+        } else {
+            Constants.ToastMessages(MainActivity.this, Constants.TOAST_CITY_EXIST);
         }
     }
 
@@ -107,13 +124,4 @@ public class MainActivity extends AppCompatActivity {
         textViewMessage.setVisibility(View.INVISIBLE);
     }
 
-    public void setDefaultLocation() {
-        Location lo = new Location();
-        lo.setCityName("Charlotte");
-        lo.setStateCode("NC");
-        if (locationArrayList == null) {
-            locationArrayList = new ArrayList<>();
-        }
-        locationArrayList.add(lo);
-    }
 }

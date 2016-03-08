@@ -1,10 +1,9 @@
 package com.example.shruj.weatherapp;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by shruj on 03/02/2016.
@@ -12,7 +11,7 @@ import java.util.HashMap;
 public class RequestParam {
     String baseUrl;
     String method;
-    HashMap<String, String> params = new HashMap<>();
+    LinkedHashMap<String, String> params = new LinkedHashMap<>();
 
     public RequestParam(String method, String baseUrl) {
         super();
@@ -37,8 +36,26 @@ public class RequestParam {
         return sb.toString();
     }
 
+    public String getEncodedParamsForStateCityValidation() {
+        StringBuilder sb = new StringBuilder();
+        for (String key : params.keySet()) {
+            String value = params.get(key);
+            if (sb.length() > 0) {
+                sb.append("/");
+            }
+            sb.append(value);
+        }
+        sb.append(Constants.JSON_EXTENSION);
+        return sb.toString();
+    }
+
+
     public String getEncodedUrl() {
         return this.baseUrl + getEncodedParams();
+    }
+
+    private String getEncodedCityStateUrl() {
+        return this.baseUrl + getEncodedParamsForStateCityValidation();
     }
 
     public HttpURLConnection setUpConnection() throws IOException {
@@ -48,13 +65,9 @@ public class RequestParam {
             httpURLConnection.setRequestMethod(Constants.GET_METHOD);
             return httpURLConnection;
         } else {
-            URL url = new URL(this.baseUrl);
+            URL url = new URL(getEncodedCityStateUrl());
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod(Constants.POST_METHOD);
-            httpURLConnection.setDoOutput(true);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream());
-            outputStreamWriter.write(getEncodedParams());
-            outputStreamWriter.flush();
+            httpURLConnection.setRequestMethod(Constants.GET_METHOD);
             return httpURLConnection;
         }
     }
